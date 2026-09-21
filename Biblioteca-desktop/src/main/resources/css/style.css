@@ -1,0 +1,205 @@
+.fundo-principal {
+    -fx-background-color: #2c2c2c;
+}
+
+.painel-secundario,
+.menu-lateral {
+    -fx-background-color: #323232;
+}
+
+.texto-branco {
+    -fx-text-fill: white;
+    -fx-text-size: 20px;
+}
+
+.texto-cinza {
+    -fx-text-fill: #b9b9b9;
+}
+
+.titulo-pagina {
+    -fx-text-fill: white;
+    -fx-font-family: "System";
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.titulo-formulario {
+    -fx-text-fill: white;
+    -fx-font-family: "System";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.subtitulo-formulario {
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+}
+
+.mensagem-boas-vindas {
+    -fx-text-fill: white;
+    -fx-font-family: "System";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.logo-titulo {
+    -fx-text-fill: #77ca8e;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.nome-usuario {
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+}
+.caixa-nome-usuario:hover {
+    -fx-background-color: #2f4738;
+    -fx-background-radius: 30px;
+}
+.botao-menu {
+    -fx-background-color: transparent;
+    -fx-text-fill: #9abca7;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 20px;
+}
+
+.fundo-botao-menu {}
+.fundo-botao-menu:hover {
+    -fx-background-color: #2f4738;
+}
+
+.botao-principal {
+    -fx-background-color: #9abca7;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+}
+
+.botao-principal:hover {
+    -fx-background-color: #88b59a;
+    -fx-text-fill: white;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0.2, 0, 2);
+}
+
+.botao-acao {
+    -fx-background-color: #717171;
+    -fx-text-fill: white;
+    -fx-pref-width: 80px;
+    -fx-pref-height: 30px;
+}
+
+.botao-acao:hover {
+    -fx-background-color: #5d8069;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.2, 0, 2);
+}
+
+.campo-texto {
+    -fx-background-color: #bbcdbf;
+    -fx-prompt-text-fill: black;
+}
+
+.campo-texto:hover {
+    -fx-effect: dropshadow(gaussian, #061c06, 10, 0.3, 0.2, 3);
+}
+
+.link-cadastro {
+    -fx-text-fill: #40fcd7;
+}
+
+.link-cadastro:hover {
+    -fx-text-fill: #77ca8e;
+    -fx-underline: true;
+}
+
+.campo-pesquisa {
+    -fx-background-color: #595959;
+    -fx-background-radius: 5px;
+}
+
+.faixa-info-emprestimo {
+    -fx-background-color: #595959;
+    -fx-background-radius: 5px;
+    -fx-opacity: 1;
+}
+
+.texto-detalhe {
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+
+.botao-pesquisa {
+    -fx-background-color: #77ca8e;
+    -fx-background-radius: 8px;
+    -fx-font-size: 18px;
+}
+
+.botao-pesquisa:hover {
+    -fx-background-color: #2f4738;
+    -fx-text-fill: white;
+    -fx-border-color: #9abca7;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+}
+
+.painel-oculto {
+    -fx-background-color: transparent;
+    -fx-opacity: 0;
+}
+
+.card-livro,
+.card-emprestimo {
+    -fx-background-color: #595959;
+    -fx-background-radius: 6px;
+    -fx-pref-height: 45px;
+}
+
+.card-livro .label,
+.card-emprestimo .label {
+    -fx-text-fill: white;
+}
+
+.scroll-sem-fundo {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #444;
+    -fx-background-radius: 10;
+}
+
+.numero-emprestimos-ativos {
+    -fx-text-fill: #bdeeff;
+    -fx-font-size: 36px;
+}
+
+.numero-devolucoes {
+    -fx-text-fill: #eaffbd;
+    -fx-font-size: 36px;
+}
+
+.texto-auxiliar {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-opacity: 0.5;
+}
+
+.card-resumo {
+    -fx-background-color: #717171;
+    -fx-background-radius: 5px;
+}
+
+.alerta-notificacao {
+    -fx-background-color: rgb(255, 0, 0, 0.5);
+}
+
+.mensagem-erro {
+    -fx-text-fill: red;
+    -fx-opacity: 0;
+}

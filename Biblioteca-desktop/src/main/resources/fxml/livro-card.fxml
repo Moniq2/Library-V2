@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.biblioteca.controller.LivroCardController">
+   <children>
+      <GridPane alignment="CENTER" layoutX="32.0" layoutY="90.0" minHeight="50.0" styleClass="card-livro" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="tituloLabel" text="Título">
+               <padding>
+                  <Insets left="10.0" />
+               </padding></Label>
+            <Label fx:id="autorLabel" text="Autor" GridPane.columnIndex="1" />
+            <Label fx:id="codigoLabel" text="Código" GridPane.columnIndex="2" />
+            <Label fx:id="anoLabel" text="Ano" GridPane.columnIndex="3" />
+            <Button fx:id="emprestarButton" alignment="CENTER" minHeight="35.0" minWidth="130.0" mnemonicParsing="false" onAction="#abrirTelaEmprestimo" styleClass="botao-acao" stylesheets="@../css/style.css" text="Pedir Emprestado" wrapText="true" GridPane.columnIndex="4">
+               <GridPane.margin>
+                  <Insets right="4.0" />
+               </GridPane.margin></Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

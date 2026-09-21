@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane styleClass="fundo-principal" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.biblioteca.controller.TelaInicialController">
+   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <Label styleClass="titulo-formulario" text="Bem Vindo!">
+            <VBox.margin>
+               <Insets left="30.0" top="20.0" />
+            </VBox.margin>
+         </Label>
+         <Label styleClass="texto-branco" text="Sistema de Biblioteca">
+            <VBox.margin>
+               <Insets left="30.0" />
+            </VBox.margin>
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label styleClass="texto-cinza" text="Gerencie livros e emprestimos de forma simples e eficiente.">
+            <VBox.margin>
+               <Insets left="30.0" />
+            </VBox.margin>
+         </Label>
+         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="170.0" spacing="50.0">
+            <children>
+               <GridPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" styleClass="card-resumo">
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="5.0" prefWidth="50.0" />
+                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="200.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints maxHeight="-Infinity" minHeight="100.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../img/clipboard-text.png" />
+                        </image>
+                        <GridPane.margin>
+                           <Insets left="5.0" />
+                        </GridPane.margin>
+                     </ImageView>
+                     <VBox maxHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" GridPane.columnIndex="1">
+                        <children>
+                           <Label fx:id="contagem_emprestimos" styleClass="numero-emprestimos-ativos" text="0" />
+                           <Label styleClass="texto-auxiliar" text="Emprestimos Ativos" VBox.vgrow="ALWAYS" />
+                        </children>
+                     </VBox>
+                  </children>
+               </GridPane>
+               <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" styleClass="card-resumo">
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="50.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints maxHeight="-Infinity" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../img/arrow-counter-clockwise.png" />
+                        </image>
+                        <GridPane.margin>
+                           <Insets left="5.0" />
+                        </GridPane.margin>
+                     </ImageView>
+                      <VBox maxHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" GridPane.columnIndex="1">
+                        <children>
+                           <Label fx:id="contagem_devolucoes" styleClass="numero-devolucoes" text="0" />
+                           <Label styleClass="texto-auxiliar" text="Devoluções hoje" />
+                        </children>
+                     </VBox>
+                  </children>
+               </GridPane>
+            </children>
+            <VBox.margin>
+               <Insets top="40.0" />
+            </VBox.margin>
+         </HBox>
+         <VBox alignment="TOP_CENTER" />
+      </children>
+   </VBox>
+</AnchorPane>
+
+

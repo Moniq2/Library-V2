@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane prefHeight="400.0" prefWidth="600.0" styleClass="fundo-principal" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.biblioteca.controller.PagCadastroController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" spacing="5.0" styleClass="painel-secundario">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/user-circle.png" />
+               </image>
+            </ImageView>
+            <Label styleClass="titulo-formulario" text="Cadastro" />
+            <Label styleClass="subtitulo-formulario" text="preencha os dados para criar um usuário." />
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="260.0" spacing="5.0">
+               <children>
+                  <Label styleClass="texto-branco" text="Email" />
+                  <TextField fx:id="campoEmail" promptText="Digite um email" styleClass="campo-texto" />
+                  <Label styleClass="texto-branco" text="Nome" />
+                  <TextField fx:id="campoNome" promptText="Digite seu nome" styleClass="campo-texto" />
+                  <Label styleClass="texto-branco" text="Senha" />
+                  <TextField fx:id="campoSenha" promptText="Crie uma senha" styleClass="campo-texto" />
+                  <Label styleClass="texto-branco" text="Selecione seu tipo de usuário:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <RadioButton fx:id="alunoCheckbox" mnemonicParsing="false" styleClass="texto-branco" text="Aluno" />
+                  <RadioButton fx:id="professorCheckbox" mnemonicParsing="false" styleClass="texto-branco" text="Professor" />
+                  <Label fx:id="mensagemLabel" prefHeight="18.0" prefWidth="255.0" styleClass="mensagem-erro" text="Label" />
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#cadastrar" styleClass="botao-principal" text="Cadastrar">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#abrirTelaLogin" styleClass="botao-principal" text="Voltar" />
+         </children>
+         <padding>
+            <Insets top="150.0" />
+         </padding>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </VBox>
+   </children>
+</StackPane>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" styleClass="fundo-principal" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.biblioteca.controller.LivrosController">
+   <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="40.0" spacing="10.0">
+            <children>
+               <Label styleClass="titulo-pagina" text="Lista de Livros">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </Label>
+               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="500.0" styleClass="campo-pesquisa">
+                  <children>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../img/magnifying-glass.png" />
+                        </image>
+                     </ImageView>
+                     <TextField fx:id="caixaDePesquisa" prefHeight="31.0" prefWidth="441.0" promptText="Pesquisar" styleClass="campo-pesquisa" stylesheets="@../css/style.css" />
+                  </children>
+                  <padding>
+                     <Insets left="20.0" />
+                  </padding>
+               </HBox>
+               <Button maxHeight="40.0" maxWidth="-Infinity" minHeight="40.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#pesquisar" prefHeight="40.0" prefWidth="120.0" styleClass="botao-pesquisa" text="Pesquisar" />
+            </children>
+            <padding>
+               <Insets left="20.0" right="20.0" />
+            </padding>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="615.0" spacing="80.0" />
+         <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="590.0" styleClass="fundo-principal">
+            <children>
+               <GridPane>
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <Label styleClass="texto-cinza" text="Título">
+                        <padding>
+                           <Insets left="10.0" />
+                        </padding>
+                     </Label>
+                     <Label styleClass="texto-cinza" text="código" GridPane.columnIndex="2" />
+                     <Label styleClass="texto-cinza" text="Autor" GridPane.columnIndex="1" />
+                     <Label styleClass="texto-cinza" text="Ano" GridPane.columnIndex="3" />
+                  </children>
+               </GridPane>
+            </children>
+         </VBox>
+         <Pagination fx:id="paginacao" maxPageIndicatorCount="5" />
+      </children>
+      <padding>
+         <Insets top="30.0" />
+      </padding>
+      <opaqueInsets>
+         <Insets />
+      </opaqueInsets>
+   </VBox>
+</AnchorPane>
