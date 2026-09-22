@@ -57,7 +57,7 @@ public class PagEmprestimoController {
                     }
                     else {
                         error.printStackTrace();
-                        System.out.println(error.getMessage());
+                        System.out.println(error.getCause().getMessage());
                         alertarErro(error.getCause().getMessage());
                     }
                     return null;

@@ -4,13 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
 public class EmprestimoClient {
-    private static final String BASE_URL = "http://localhost:8081/library/api/v1/emprestimos";
+    private static final String BASE_URL = "http://localhost:8081/library/api/v1/usuarios";
 
     private final HttpClient client;
     private final ObjectMapper mapper;
@@ -25,8 +27,9 @@ public class EmprestimoClient {
         mapper.registerModule(new JavaTimeModule());
     }
 
-    public CompletableFuture<HttpResponse<String>> buscarEmprestimo (String token, Long id) {
-        String url = String.format(BASE_URL + "/%d", id);
+    public CompletableFuture<HttpResponse<String>> buscarPorTermo (String token, String termo, Long idUsuario, int pagina, int limite) {
+        String termoEncoded = URLEncoder.encode(termo, StandardCharsets.UTF_8);
+        String url = String.format(BASE_URL + "/%d/emprestimos/buscar?q=%s&pagina=%d&limite=%d", idUsuario, termoEncoded, pagina, limite);
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(url))
                 .header("Accept", "application/json")
@@ -38,7 +41,7 @@ public class EmprestimoClient {
     }
 
     public CompletableFuture<HttpResponse<String>> listar(String token, Long usuarioId, int pagina, int limite) {
-        String url = String.format(BASE_URL + "?id=%d&limite=%d&pagina=%d", usuarioId, limite, pagina);
+        String url = String.format(BASE_URL + "/%d/emprestimos?limite=%d&pagina=%d", usuarioId, limite, pagina);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Accept", "application/json")
@@ -50,7 +53,7 @@ public class EmprestimoClient {
     }
 
     public CompletableFuture<HttpResponse<String>> renovar (String token, Long emprestimoId) {
-        String url = String.format(BASE_URL + "/" + emprestimoId + "/renovar");
+        String url = String.format(BASE_URL + "/emprestimos/%d/renovar", emprestimoId);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Accept", "application/json")
@@ -78,7 +81,7 @@ public class EmprestimoClient {
 
     public CompletableFuture<HttpResponse<String>> emprestar(String token, String emprestimoJson) {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL))
+                .uri(URI.create(BASE_URL + "/emprestimos"))
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + token)
@@ -89,8 +92,9 @@ public class EmprestimoClient {
     }
 
     public CompletableFuture<HttpResponse<String>> devolver(String token, Long emprestimoId) {
+        String url = String.format(BASE_URL + "/emprestimos/%d/devolver", emprestimoId);
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + "/" + emprestimoId))
+                .uri(URI.create(url))
                 .header("Accept", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .method("PATCH", HttpRequest.BodyPublishers.noBody())
@@ -100,7 +104,7 @@ public class EmprestimoClient {
     }
 
     private CompletableFuture<HttpResponse<String>> listarPorRecurso(String token, String recurso, Long usuarioId) {
-        String url = String.format(BASE_URL + "/%s?usuarioId=%d", recurso, usuarioId);
+        String url = String.format(BASE_URL + "/%d/emprestimos/%s", usuarioId, recurso);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Accept", "application/json")

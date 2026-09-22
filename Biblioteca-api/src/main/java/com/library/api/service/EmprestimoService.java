@@ -96,6 +96,13 @@ public class EmprestimoService {
         }
     }
 
+    public Page<EmprestimoResponseDTO> buscar(String q, Long usuarioId, int limite, int pagina){
+        usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("usuario não encontrado."));
+        return emprestimoRepository.findEmprestimosByTerm(q, PageRequest.of(pagina, limite))
+                .map(emprestimo -> mapper.map(emprestimo, EmprestimoResponseDTO.class));
+    }
+
     public Page<EmprestimoResponseDTO> listar(Long usuarioId, int limite, int pagina){
         usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("usuario não encontrado."));

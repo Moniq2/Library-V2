@@ -1,4 +1,4 @@
 package service;
 
-public class UsuarioTest {
+public class UsuarioServiceTest {
 }

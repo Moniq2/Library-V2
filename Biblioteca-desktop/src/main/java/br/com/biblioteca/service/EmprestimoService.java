@@ -41,9 +41,7 @@ public class EmprestimoService {
                     try {
                         System.out.println(response.body());
 
-                        return mapper.readValue(
-                                response.body(),
-                                mapper.getTypeFactory().constructParametricType(PageResponse.class, EmprestimoResponse.class)
+                        return mapper.readValue(response.body(), mapper.getTypeFactory().constructParametricType(PageResponse.class, EmprestimoResponse.class)
                         );
                     } catch (JsonProcessingException e) {
                         throw new FalhaNoProcessamentoDeRespostaException("Erro na interpretacao da resposta http. " + response.body());
@@ -81,7 +79,7 @@ public class EmprestimoService {
                                 }
                             case 403:
                                 throw new SemPermissaoParaAcessarRecursoException("Você não tem permissão para acessar esse recurso.");
-                            case 200:
+                            case 201:
                                 try {
                                     return mapper.readValue(response.body(), EmprestimoResponse.class);
                                 } catch (JsonProcessingException e) {
@@ -122,8 +120,8 @@ public class EmprestimoService {
     }
 
 
-    public CompletableFuture<EmprestimoResponse> buscarPorId(String token, long emprestimoId) {
-        return emprestimoClient.buscarEmprestimo(token, emprestimoId)
+    public CompletableFuture<PageResponse<EmprestimoResponse>> buscarPorTermo(String token, String termo,long emprestimoId, int pagina, int limite) {
+        return emprestimoClient.buscarPorTermo(token, termo, emprestimoId, pagina, limite)
                 .thenApply(response -> {
                     if (response.statusCode() == 404) {
                         throw new RecursoNaoEncontradoException("Emprestimo nao encontrado.");
@@ -135,7 +133,7 @@ public class EmprestimoService {
                         throw new RuntimeException("Erro ao buscar emprestimo.\nCódigo de erro: " + response.statusCode());
                     }
                     try {
-                        return mapper.readValue(response.body(), EmprestimoResponse.class);
+                        return mapper.readValue(response.body(), mapper.getTypeFactory().constructParametricType(PageResponse.class, EmprestimoResponse.class));
                     } catch (JsonProcessingException e) {
                         throw new FalhaNoProcessamentoDeRespostaException("Nao foi possivel interpretar a resposta http." + response.body());
                     }
@@ -170,19 +168,17 @@ public class EmprestimoService {
         return emprestimoClient.listarADevolverHoje(token, usuarioId)
                 .thenApply(response -> {
                     if (response.statusCode() == 404) {
-                        throw new RecursoNaoEncontradoException("Usuario nao encontrado.");
+                        throw new RecursoNaoEncontradoException("Usuario não encontrado.");
                     }
                     else if (response.statusCode() != 200) {
-                        throw new RuntimeException("Erro ao calcular numero de devolucoes. \nCódigo de erro: " + response.statusCode());
+                        throw new RuntimeException("Erro ao calcular numero de devolucoes. \nErro: " + response.statusCode());
                     }
                     try {
-                        List<EmprestimoResponse> emprestimos = mapper.readValue(
-                                response.body(),
-                                new TypeReference<List<EmprestimoResponse>>() {}
+                        List<EmprestimoResponse> emprestimos = mapper.readValue(response.body(), new TypeReference<List<EmprestimoResponse>>() {}
                         );
                         return String.valueOf(emprestimos.size());
                     } catch (JsonProcessingException e) {
-                        throw new FalhaNoProcessamentoDeRespostaException("Nao foi possivel interpretar a resposta http." + response.body());
+                        throw new FalhaNoProcessamentoDeRespostaException("Nao foi possivel interpretar a resposta http. Erro:" + response.statusCode());
                     }
                 });
     }

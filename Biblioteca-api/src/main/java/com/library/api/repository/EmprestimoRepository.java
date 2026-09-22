@@ -24,6 +24,15 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
     @Query("""
         SELECT e
         FROM Emprestimo e
+        WHERE UPPER(e.livro.titulo) LIKE UPPER(CONCAT('%', :termo, '%'))
+        OR CAST(e.dataEmprestimo AS string) LIKE TRIM(:termo)
+        OR CAST(e.id AS string) LIKE TRIM(:termo)
+    """)
+    Page<Emprestimo> findEmprestimosByTerm(@Param("termo") String termo, Pageable pageable);
+
+    @Query("""
+        SELECT e
+        FROM Emprestimo e
         WHERE e.usuario.id = :usuarioId
         AND e.ativo = true
         ORDER BY e.dataEmprestimo DESC

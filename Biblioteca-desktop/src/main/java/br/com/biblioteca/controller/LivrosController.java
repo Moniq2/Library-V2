@@ -6,17 +6,20 @@ import br.com.biblioteca.service.LivroService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.List;
 
 public class LivrosController {
     private final LivroService livroService = new LivroService();
-    private final int LIMITE = 10;
+    private final int LIMITE = 12;
     private LivroCardController livroCardController;
     private String termoPesquisa = "";
     private MenuLateralController menuLateralController;
@@ -26,6 +29,9 @@ public class LivrosController {
 
     @FXML
     private TextField caixaDePesquisa;
+
+    @FXML
+    private VBox container;
 
     @FXML
     private void initialize() {}
@@ -52,6 +58,10 @@ public class LivrosController {
             livroService.listar(index, LIMITE)
                     .thenAccept(response -> {
                         Platform.runLater(() -> {
+                            if (response.isEmpty()){
+                                mostrarMensagem("A lista de livros está vazia.");
+                                return;
+                            }
                             paginacao.setPageCount(response.getTotalPages());
                             preencherCards(livrosContainer, response.getContent());
                         });
@@ -61,6 +71,10 @@ public class LivrosController {
             livroService.buscarPorTermo(termoPesquisa, index, LIMITE)
                     .thenAccept(response -> {
                         Platform.runLater(() -> {
+                            if (response.isEmpty()){
+                                mostrarMensagem("Não foram encontrados resultados para essa pesquisa.");
+                                return;
+                            }
                             paginacao.setPageCount(response.getTotalPages());
                             preencherCards(livrosContainer, response.getContent());
                         });
@@ -74,6 +88,19 @@ public class LivrosController {
         termoPesquisa = caixaDePesquisa.getText().trim();
         paginacao.setCurrentPageIndex(0);
         mostrarLivros();
+    }
+
+    private void mostrarMensagem(String mensagem){
+        Label texto = new Label(mensagem);
+        texto.setPadding(new Insets(10));
+        texto.getStyleClass().add("texto-cinza");
+        texto.setStyle("-fx-font-size: 15px;");
+        HBox caixa =  new HBox();
+        caixa.getChildren().add(texto);
+        container.getChildren().add(caixa);
+
+        paginacao.setVisible(false);
+        paginacao.setManaged(false);
     }
 
     public void preencherCards(VBox livrosContainer, List<LivroResponse> livros) {

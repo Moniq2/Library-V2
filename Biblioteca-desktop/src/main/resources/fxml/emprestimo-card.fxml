@@ -15,8 +15,9 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" prefWidth="180.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="50.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="50.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="50.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -26,11 +27,12 @@
                <padding>
                   <Insets left="10.0" />
                </padding></Label>
-                <Label fx:id="dataEntregaLabel" text="Data de entrega" GridPane.columnIndex="2" />
-                <Label GridPane.columnIndex="3" />
-            <Button fx:id="renovarButton" mnemonicParsing="false" onAction="#renovar" styleClass="botao-acao" stylesheets="@../css/style.css" text="Renovar" GridPane.columnIndex="3" />
-            <Button fx:id="devolverButton" mnemonicParsing="false" onAction="#devolver" styleClass="botao-acao" text="Devolver" GridPane.columnIndex="4" />
+                <Label fx:id="dataEmprestimoLabel" text="Data do Emprestimo" GridPane.columnIndex="2" />
+                <Label GridPane.columnIndex="4" />
+            <Button fx:id="renovarButton" mnemonicParsing="false" onAction="#renovar" styleClass="botao-acao" stylesheets="@../css/style.css" text="Renovar" GridPane.columnIndex="4" />
+            <Button fx:id="devolverButton" mnemonicParsing="false" onAction="#devolver" styleClass="botao-acao" text="Devolver" GridPane.columnIndex="5" />
             <Label fx:id="autorLabel" text="Autor" GridPane.columnIndex="1" />
+            <Label fx:id="dataEntregaLabel" text="Data de Entrega" GridPane.columnIndex="3" />
             </children>
         </GridPane>
     </children>

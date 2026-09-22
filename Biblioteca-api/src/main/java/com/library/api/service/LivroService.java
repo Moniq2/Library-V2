@@ -29,7 +29,7 @@ public class LivroService {
 
     public Page<LivroResponseDTO> buscarPorTermo(String termo, int pagina, int limite){
         Pageable pageable = PageRequest.of(pagina, limite);
-        return livroRepository.buscarPorTermo(termo, pageable)
+        return livroRepository.findByTerm(termo, pageable)
                 .map(livro -> mapper.map(livro, LivroResponseDTO.class));
     }
 }

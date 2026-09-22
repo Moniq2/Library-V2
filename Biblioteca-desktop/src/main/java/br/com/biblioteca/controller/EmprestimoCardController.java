@@ -22,6 +22,8 @@ public class EmprestimoCardController {
     @FXML
     private Label dataEntregaLabel;
     @FXML
+    private Label dataEmprestimoLabel;
+    @FXML
     private Label autorLabel;
     @FXML
     private Button devolverButton;
@@ -40,6 +42,7 @@ public class EmprestimoCardController {
         tituloLabel.setText(livro.getTitulo());
         autorLabel.setText(livro.getAutor());
         dataEntregaLabel.setText(emprestimo.getDataDevolucao().toString());
+        dataEmprestimoLabel.setText(emprestimo.getDataEmprestimo().toString());
 
         if (!emprestimo.getAtivo()){
             devolverButton.setDisable(true);

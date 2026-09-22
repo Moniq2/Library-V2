@@ -7,10 +7,12 @@ import br.com.biblioteca.service.EmprestimoService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
@@ -21,7 +23,7 @@ public class EmprestimosController {
     EmprestimoService emprestimoService =  new EmprestimoService();
     EmprestimoCardController emprestimoCardController = new EmprestimoCardController();
 
-    int LIMITE = 10;
+    int LIMITE = 12;
 
     @FXML
     private Pagination paginacao;
@@ -29,7 +31,10 @@ public class EmprestimosController {
     private VBox container;
     @FXML
     private void initialize(){}
+    @FXML
+    private TextField caixaDePesquisa;
 
+    private String termo = "";
     private String token;
 
     public void setUsuario(String token, UsuarioResponse usuario){
@@ -49,36 +54,63 @@ public class EmprestimosController {
     }
 
     private void carregarEmprestimos(VBox emprestimosVBox, int pageIndex){
-        emprestimoService.listar(token, usuario.getId(), pageIndex, LIMITE)
-                .thenAccept(response -> {
-                    List<EmprestimoResponse> emprestimos = response.getContent();
-                    Platform.runLater(() -> {
-                        preencherCards(emprestimosVBox, emprestimos);
-                        paginacao.setPageCount(response.getTotalPages());
+        if (termo.isEmpty()){
+            emprestimoService.listar(token, usuario.getId(), pageIndex, LIMITE)
+                    .thenAccept(response -> {
+                        List<EmprestimoResponse> emprestimos = response.getContent();
+                        Platform.runLater(() -> {
+                            if (emprestimos.isEmpty()) {
+                                mostrarMensagem("Você não tem nenhum emprestimo cadastrado até agora.");
+                                return;
+                            }
+
+                            preencherCards(emprestimosVBox, emprestimos);
+                            paginacao.setPageCount(response.getTotalPages());
+                        });
+                    })
+                    .exceptionally(error -> {
+                        error.printStackTrace();
+                        System.out.println(error.getCause().getMessage());
+                        mostrarErro(emprestimosVBox);
+                        return null;
                     });
-                })
-                .exceptionally(error -> {
-                    error.printStackTrace();
-                    System.out.println(error.getMessage());
-                    mostrarErro(emprestimosVBox);
-                    return null;
-                });
+        }
+        else {
+            emprestimoService.buscarPorTermo(token, termo, usuario.getId(), pageIndex, LIMITE)
+                    .thenAccept(response -> {
+                        List<EmprestimoResponse> emprestimos = response.getContent();
+                        Platform.runLater(() -> {
+                            if (emprestimos.isEmpty()) {
+                                mostrarMensagem("Não foram encontrados resultados para essa pesquisa.");
+                                return;
+                            }
+                            preencherCards(emprestimosVBox, emprestimos);
+                            paginacao.setPageCount(response.getTotalPages());
+                        });
+                    })
+                    .exceptionally(error -> {
+                        error.printStackTrace();
+                        System.out.println(error.getCause().getMessage());
+                        mostrarErro(emprestimosVBox);
+                        return null;
+                    });
+        }
+    }
+
+    private void mostrarMensagem(String mensagem){
+        Label texto = new Label(mensagem);
+        texto.setPadding(new Insets(10));
+        texto.getStyleClass().add("texto-cinza");
+        texto.setStyle("-fx-font-size: 15px;");
+        HBox caixa =  new HBox();
+        caixa.getChildren().add(texto);
+        container.getChildren().add(caixa);
+
+        paginacao.setVisible(false);
+        paginacao.setManaged(false);
     }
 
     private void preencherCards(VBox emprestimosVbox, List<EmprestimoResponse> emprestimos) {
-        
-        if (emprestimos.isEmpty()) {
-            Label mensagem = new Label("Você não tem nenhum emprestimo cadastrado até agora.");
-            mensagem.getStyleClass().add("texto-cinza");
-            mensagem.setStyle("-fx-font-size: 15px;");
-            HBox caixa =  new HBox();
-            caixa.getChildren().add(mensagem);
-            container.getChildren().add(caixa);
-
-            paginacao.setVisible(false);
-            paginacao.setManaged(false);
-            return;
-        }
 
         for (EmprestimoResponse emprestimo : emprestimos) {
             try {
@@ -92,6 +124,12 @@ public class EmprestimosController {
                 throw new ErroAoMostrarTelaException("Não foi possível mostrar card.");
             }
         }
+    }
+
+    @FXML
+    private void pesquisar(){
+        termo = caixaDePesquisa.getText().trim();
+        mostrarEmprestimos();
     }
 
     private void mostrarErro(VBox emprestimosVbox){

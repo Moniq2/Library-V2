@@ -79,7 +79,6 @@ public class UsuarioService {
                             return mapper.readValue(response.body(), UsuarioResponse.class);
                         }
                         catch (JsonProcessingException e) {
-                            System.out.println("deu erro aqui" + response.body());
                             throw new FalhaNoProcessamentoDeRespostaException("Erro ao processar resposta da API");
                         }
                     }

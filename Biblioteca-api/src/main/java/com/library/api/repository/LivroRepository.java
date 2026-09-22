@@ -15,5 +15,5 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
         OR UPPER(l.autor) LIKE UPPER(CONCAT('%', :termo, '%'))
         ORDER BY l.titulo ASC
     """)
-    public Page<Livro> buscarPorTermo(@Param("termo") String termo, Pageable pageable);
+    public Page<Livro> findByTerm(@Param("termo") String termo, Pageable pageable);
 }
