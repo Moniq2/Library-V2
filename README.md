@@ -41,7 +41,7 @@ Cliente desktop responsável pela interface com o usuário, consumindo a API por
 - FXML para definição de telas
 - Controllers dedicados por tela
 - Clients HTTP para comunicação com a API (`UsuarioClient`, `LivroClient`, `EmprestimoClient`)
-- Java 26 (JavaFX 26)
+- Java 21 (JavaFX 21)
 
 Telas disponíveis: login, cadastro, tela inicial, listagem de livros, listagem de empréstimos e menu lateral de navegação.
 
@@ -49,7 +49,7 @@ Telas disponíveis: login, cadastro, tela inicial, listagem de livros, listagem 
 
 ### Pré-requisitos
 
-- JDK 17 (para a API) e JDK 26 (para o desktop)
+- JDK 17 (para a API) e JDK 21 (para o desktop)
 - Maven
 - MySQL
 
