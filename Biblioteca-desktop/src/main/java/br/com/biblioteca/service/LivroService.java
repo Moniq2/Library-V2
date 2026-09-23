@@ -8,7 +8,6 @@ import br.com.biblioteca.model.livro.LivroResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
 import java.util.concurrent.CompletableFuture;
 
 public class LivroService {
@@ -16,8 +15,12 @@ public class LivroService {
     private final ObjectMapper mapper;
 
     public LivroService() {
-        this.livroClient = new LivroClient();
-        this.mapper = new ObjectMapper();
+        this(new LivroClient(), new ObjectMapper());
+    }
+
+    public LivroService(LivroClient livroClient, ObjectMapper mapper) {
+        this.livroClient = livroClient;
+        this.mapper = mapper;
         mapper.registerModule(new JavaTimeModule());
     }
 

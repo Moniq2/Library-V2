@@ -10,8 +10,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.validator.routines.EmailValidator;
 
-import java.net.http.HttpClient;
-import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
 public class UsuarioService {
@@ -20,9 +18,13 @@ public class UsuarioService {
     private final EmailValidator validator;
 
     public UsuarioService() {
+        this(new UsuarioClient(), new ObjectMapper());
+    }
+
+    public UsuarioService(UsuarioClient usuarioClient, ObjectMapper mapper) {
         this.validator = EmailValidator.getInstance();
-        this.mapper = new ObjectMapper();
-        this.usuarioClient = new UsuarioClient();
+        this.mapper = mapper;
+        this.usuarioClient = usuarioClient;
     }
 
     public void cadastrar(UsuarioRequest usuarioRequest) {

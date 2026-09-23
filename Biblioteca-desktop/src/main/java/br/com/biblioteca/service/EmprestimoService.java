@@ -1,7 +1,6 @@
 package br.com.biblioteca.service;
 
 import br.com.biblioteca.client.EmprestimoClient;
-import br.com.biblioteca.client.UsuarioClient;
 import br.com.biblioteca.exception.*;
 import br.com.biblioteca.model.common.PageResponse;
 import br.com.biblioteca.model.emprestimo.EmprestimoRequest;
@@ -17,13 +16,16 @@ import java.util.concurrent.CompletableFuture;
 public class EmprestimoService {
     private final EmprestimoClient emprestimoClient;
     private final ObjectMapper mapper;
-    private final UsuarioClient usuarioClient;
 
     public EmprestimoService() {
-        this.emprestimoClient = new EmprestimoClient();
-        this.mapper = new ObjectMapper();
+        emprestimoClient = new EmprestimoClient();
+        mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-        usuarioClient = new UsuarioClient();
+    }
+    public EmprestimoService(EmprestimoClient emprestimoClient, ObjectMapper mapper) {
+        this.emprestimoClient = emprestimoClient;
+        this.mapper = mapper;
+        mapper.registerModule(new JavaTimeModule());
     }
 
     public CompletableFuture<PageResponse<EmprestimoResponse>> listar(String token ,long usuarioId, int pagina, int limite) {

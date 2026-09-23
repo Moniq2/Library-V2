@@ -3,7 +3,6 @@ package br.com.biblioteca.controller;
 import br.com.biblioteca.exception.CredenciaisInvalidasException;
 import br.com.biblioteca.exception.EmailInvalidoException;
 import br.com.biblioteca.model.usuario.UsuarioLoginRequest;
-import br.com.biblioteca.model.usuario.UsuarioResponse;
 import br.com.biblioteca.security.Session;
 import br.com.biblioteca.service.UsuarioService;
 import javafx.animation.PauseTransition;

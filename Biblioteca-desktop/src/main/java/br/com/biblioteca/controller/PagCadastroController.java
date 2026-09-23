@@ -2,9 +2,7 @@ package br.com.biblioteca.controller;
 
 import br.com.biblioteca.exception.EmailInvalidoException;
 import br.com.biblioteca.model.usuario.UsuarioRequest;
-import br.com.biblioteca.model.usuario.UsuarioResponse;
 import br.com.biblioteca.service.UsuarioService;
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

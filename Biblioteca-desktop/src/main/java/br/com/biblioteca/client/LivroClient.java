@@ -1,7 +1,5 @@
 package br.com.biblioteca.client;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
